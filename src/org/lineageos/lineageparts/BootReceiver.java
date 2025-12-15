@@ -30,8 +30,9 @@ public class BootReceiver extends BroadcastReceiver {
         // Extract the contributors database
         ContributorsCloudFragment.extractContributorsCloudDatabase(ctx);
 
-        // Toggle LiveDisplay visibility regardless of user type
+        // Toggle visibility of some settings regardless of user type
         LiveDisplaySettings.restoreLiveDisplay(ctx);
+        TouchscreenGestureSettings.restoreTouchscreenGestures(ctx);
 
         if (!ctx.getSystemService(UserManager.class).isPrimaryUser()) {
             Log.d(TAG, "Not running as the primary user, skipping tunable restoration.");

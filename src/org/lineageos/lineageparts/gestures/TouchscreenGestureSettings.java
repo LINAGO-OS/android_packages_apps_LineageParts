@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2016 The CyanogenMod project
- * SPDX-FileCopyrightText: 2017-2023 The LineageOS Project
+ * SPDX-FileCopyrightText: 2017-2025 The LineageOS Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -23,6 +23,7 @@ import org.lineageos.lineageparts.R;
 import org.lineageos.lineageparts.SettingsPreferenceFragment;
 import org.lineageos.lineageparts.search.BaseSearchIndexProvider;
 import org.lineageos.lineageparts.search.Searchable;
+import org.lineageos.lineageparts.utils.GenericUtils;
 import org.lineageos.lineageparts.utils.ResourceUtils;
 
 import java.util.Set;
@@ -135,6 +136,11 @@ public class TouchscreenGestureSettings extends SettingsPreferenceFragment
                     return R.drawable.ic_gesture_action_none;
             }
         }
+    }
+
+    public static void restoreTouchscreenGestures(final Context context) {
+        GenericUtils.setComponentEnabled(context, TouchscreenGestureSettings.class.getName(),
+                isTouchscreenGesturesSupported(context));
     }
 
     public static void restoreTouchscreenGestureStates(final Context context) {
