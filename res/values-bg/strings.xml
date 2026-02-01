@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      SPDX-FileCopyrightText: 2015 The CyanogenMod Project
-     SPDX-FileCopyrightText: 2017-2023 The LineageOS Project
+     SPDX-FileCopyrightText: 2017-2025 The LineageOS Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
@@ -177,8 +177,8 @@
     <string name="power_end_call_summary">Прекратяване на текущото повикване чрез натискане на бутона за захранване</string>
     <string name="swap_volume_buttons_title">Преориентиране</string>
     <string name="swap_volume_buttons_summary">Разменя бутоните за сила на звука, когато екрана се завъртян</string>
-    <string name="volume_panel_on_left_title">Покажи от ляво</string>
-    <string name="volume_panel_on_left_summary">Покажи панела за звук от лявата страна на екрана</string>
+    <string name="volume_panel_position_left">Вляво</string>
+    <string name="volume_panel_position_right">Вдясно</string>
     <string name="button_wake_title">Събуди устройството</string>
     <string name="volume_answer_call_title">Отговори на обаждане</string>
     <string name="volume_answer_call_summary">Отговаряне на входящите повиквания чрез натискане на бутоните за звук</string>
@@ -205,8 +205,6 @@
     <string name="swap_capacitive_keys_summary">Размяна на бутоните \"Последни\" и \"Назад\"</string>
     <string name="navigation_bar_category">Навигационна лента</string>
     <string name="navigation_bar_enable_taskbar_title">Включи лентата на задачите</string>
-    <string name="navigation_bar_invert_layout_title">Объръщане реда на бутоните</string>
-    <string name="navigation_bar_invert_layout_summary">Обръща подредбата на лентата за навигиране</string>
     <string name="navigation_bar_left_summary">Поставете лентата за навигация от лявата страна на екрана в пейзажен режим</string>
     <string name="navigation_bar_back_long_press_title">Действие при дълго натискане на Назад</string>
     <string name="navigation_bar_home_long_press_title">Действие при дълго натисканане на начало</string>
@@ -370,7 +368,6 @@
     <string name="status_bar_am_pm_hidden">Скрит</string>
     <string name="status_bar_battery_title">Батерия</string>
     <string name="status_bar_battery_style_title">Икона на батерията</string>
-    <string name="status_bar_battery_style_icon_portrait">Вертикална икона</string>
     <string name="status_bar_battery_style_circle">Кръг</string>
     <string name="status_bar_battery_style_text">Текст</string>
     <string name="status_bar_battery_percentage_title">Заряд на батерията в проценти</string>

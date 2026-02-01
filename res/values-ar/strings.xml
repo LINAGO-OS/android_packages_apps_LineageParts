@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      SPDX-FileCopyrightText: 2015 The CyanogenMod Project
-     SPDX-FileCopyrightText: 2017-2023 The LineageOS Project
+     SPDX-FileCopyrightText: 2017-2025 The LineageOS Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
@@ -157,8 +157,8 @@
     <string name="power_end_call_summary">إنهاء المكالمة الحالية عن طريق الضغط على زر الطاقة</string>
     <string name="swap_volume_buttons_title">التبديل</string>
     <string name="swap_volume_buttons_summary">تبديل ازرار الصوت عند استدارة الشاشة</string>
-    <string name="volume_panel_on_left_title">عرض اللوحة على اليسار</string>
-    <string name="volume_panel_on_left_summary">اظهار لوحة الصوت على الجانب الأيسر من الشاشة</string>
+    <string name="volume_panel_position_left">اليسار</string>
+    <string name="volume_panel_position_right">اليمين</string>
     <string name="button_wake_title">إيقاظ الجهاز</string>
     <string name="volume_answer_call_title">الرد على المكالمة</string>
     <string name="volume_answer_call_summary">الرد على المكالمات الواردة بالضغط على أزرار الصوت</string>
@@ -184,7 +184,6 @@
     <string name="swap_capacitive_keys_title">تبديل الأزرار الضغطية</string>
     <string name="swap_capacitive_keys_summary">قم بتبديل ترتيب زري التطبيقات الحديثة والرجوع</string>
     <string name="navigation_bar_category">شريط التنقل</string>
-    <string name="navigation_bar_invert_layout_title">عكس التخطيط</string>
     <string name="navigation_bar_left_summary">وضع شريط التنقل على الجانب الأيسر من الشاشة عندما تكون في وضعها الأفقي</string>
     <string name="navigation_bar_back_long_press_title">إجراء الضغط المطول على زر الرجوع</string>
     <string name="navigation_bar_home_long_press_title">إجراء الضغط الطويل على زر الرئيسية</string>
@@ -340,7 +339,6 @@
     <string name="status_bar_am_pm_hidden">مخفي</string>
     <string name="status_bar_battery_title">مؤشر البطارية</string>
     <string name="status_bar_battery_style_title">نمط حالة البطارية</string>
-    <string name="status_bar_battery_style_icon_portrait">رمز رأسي</string>
     <string name="status_bar_battery_style_circle">دائرة</string>
     <string name="status_bar_battery_style_text">نص</string>
     <string name="status_bar_battery_percentage_title">نسبة البطارية</string>

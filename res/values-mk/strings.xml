@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      SPDX-FileCopyrightText: 2015 The CyanogenMod Project
-     SPDX-FileCopyrightText: 2017-2023 The LineageOS Project
+     SPDX-FileCopyrightText: 2017-2025 The LineageOS Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
@@ -148,6 +148,8 @@
     <string name="power_end_call_summary">Завршете го тековниот повик со притискање на копчето за вклучување</string>
     <string name="swap_volume_buttons_title">Преориентација</string>
     <string name="swap_volume_buttons_summary">Заменете ги местата на копчиња за менување на јачината на звукот кога екранот е ротиран</string>
+    <string name="volume_panel_position_left">Лево</string>
+    <string name="volume_panel_position_right">Десно</string>
     <string name="button_wake_title">Разбуди уред</string>
     <string name="volume_answer_call_title">Одговори на повикот</string>
     <string name="volume_answer_call_summary">Одговори на дојдовните повици со притискање на копчињата за јачина на звук</string>
@@ -310,7 +312,6 @@
     <string name="status_bar_am_pm_hidden">Скриено</string>
     <string name="status_bar_battery_title">Индикатор за батерија</string>
     <string name="status_bar_battery_style_title">Стил на индикатор на батеријата</string>
-    <string name="status_bar_battery_style_icon_portrait">Иконски портрет</string>
     <string name="status_bar_battery_style_circle">Круг</string>
     <string name="status_bar_battery_style_text">Текст</string>
     <string name="status_bar_battery_percentage_title">Процент на батерија</string>

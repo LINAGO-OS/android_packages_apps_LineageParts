@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      SPDX-FileCopyrightText: 2015 The CyanogenMod Project
-     SPDX-FileCopyrightText: 2017-2023 The LineageOS Project
+     SPDX-FileCopyrightText: 2017-2025 The LineageOS Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
@@ -154,6 +154,8 @@
     <string name="power_end_call_summary">Прекините телефонски позив притиском на дугме за напајање.</string>
     <string name="swap_volume_buttons_title">Преоријентација</string>
     <string name="swap_volume_buttons_summary">Замените места дугмади за јачину звука када је екран ротиран.</string>
+    <string name="volume_panel_position_left">Лево</string>
+    <string name="volume_panel_position_right">Десно</string>
     <string name="button_wake_title">Пробуди уређај</string>
     <string name="volume_answer_call_title">Одговори на позив</string>
     <string name="volume_answer_call_summary">Одговорите на долазни позив притиском на дугмад за јачину звука.</string>
@@ -175,7 +177,6 @@
     <string name="disable_navkeys_title">Навигациона трака на екрану</string>
     <string name="disable_navkeys_summary">Омогућите навигациону траку на екрану и онемогућите хардверску дугмад.</string>
     <string name="navigation_bar_category">Навигациона трака</string>
-    <string name="navigation_bar_invert_layout_title">Обрни распоред</string>
     <string name="navigation_bar_left_summary">Поставља навигациону траку слева у водоравном режиму.</string>
     <string name="navigation_bar_home_long_press_title">Дуги притисак на дугме „Почетна“</string>
     <string name="navigation_bar_home_double_tap_title">Двоструки додир дугмета „Почетна“</string>
@@ -325,7 +326,6 @@
     <string name="status_bar_am_pm_hidden">Скривено</string>
     <string name="status_bar_battery_title">Индикатор батерије</string>
     <string name="status_bar_battery_style_title">Стил индикатора батерије</string>
-    <string name="status_bar_battery_style_icon_portrait">Усправна икона</string>
     <string name="status_bar_battery_style_circle">Круг</string>
     <string name="status_bar_battery_style_text">Текст</string>
     <string name="status_bar_battery_percentage_title">Проценат батерије</string>

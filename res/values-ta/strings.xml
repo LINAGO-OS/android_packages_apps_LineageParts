@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      SPDX-FileCopyrightText: 2015 The CyanogenMod Project
-     SPDX-FileCopyrightText: 2017-2023 The LineageOS Project
+     SPDX-FileCopyrightText: 2017-2025 The LineageOS Project
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
@@ -103,6 +103,9 @@
     <string name="live_display_low_power_summary">தரம் குறையாமல் குறைந்த மின் நுகர்வுக்காகத் திரையைச் சீரமைக்க</string>
     <string name="live_display_enhance_color_title">நிறங்களை மேம்படுத்துக</string>
     <string name="live_display_enhance_color_summary">தோல் நிறங்கள், காட்சிகள், பிற படங்கள் ஆகியவற்றின் வண்ண அதிர்வை மேம்படுத்துக</string>
+    <string name="live_display_color_profile_title">நிறத் தனியமைப்பு</string>
+    <string name="live_display_color_profile_standard_title">இயல்பு</string>
+    <string name="live_display_color_profile_standard_summary">துல்லியமான நிறங்களும் ஒளிமிக்க வெண்மையும்</string>
     <string name="live_display_color_profile_natural_title">இயற்கை</string>
     <string name="live_display_color_profile_natural_summary">மெய்யான நிறங்களும், தொலி நிறத்தொனிகளும்</string>
     <string name="live_display_color_profile_cinema_title">திரையுலகம்</string>
@@ -157,8 +160,9 @@
     <string name="power_end_call_summary">ஆற்றல் பொத்தானை அழுத்தி நடப்பு அழைப்பை முடிக்க</string>
     <string name="swap_volume_buttons_title">மறுசீரமைக்க</string>
     <string name="swap_volume_buttons_summary">திரை சுழற்றப்படும்போது, ஒளியளவுப் பொத்தான்களை இடமாற்றுக</string>
-    <string name="volume_panel_on_left_title">இடப்புறத்தில் பலகத்தைக் காட்டுக</string>
-    <string name="volume_panel_on_left_summary">திரையின் இடப்பக்கத்தில் ஒலியளவு பலகத்தைக் காண்பிக்க</string>
+    <string name="volume_panel_position_title">ஒலியளவுப் பலக நிலை</string>
+    <string name="volume_panel_position_left">இடது</string>
+    <string name="volume_panel_position_right">வலது</string>
     <string name="button_wake_title">கருவியை எழுப்புக</string>
     <string name="volume_answer_call_title">அழைப்பிற்குப் பதிலளிக்க</string>
     <string name="volume_answer_call_summary">ஒலியளவு பொத்தான்களை அழுத்துவதன் மூலம் உள்வரும் அழைப்புகளுக்குப் பதிலளிக்க</string>
@@ -174,8 +178,6 @@
     <string name="backlight_summary_enabled">இயக்கப்பட்டது</string>
     <string name="navigation_bar_category">வழிசெல்லுதல் பட்டி</string>
     <string name="navigation_bar_enable_taskbar_title">பணிப்பட்டியைச் செயற்படுத்துக</string>
-    <string name="navigation_bar_invert_layout_title">தளவமைப்பைத் தலைகீழாக்குக</string>
-    <string name="navigation_bar_invert_layout_summary">வழிநடத்தும் பட்டியின் தளவமைப்பைத் தலைகீழாக மாற்றுகிறது</string>
     <string name="navigation_bar_edge_long_swipe_title">விளிம்பு நீண்ட தேய்த்தல் செயல்</string>
     <string name="power_menu_title">ஆற்றல் பட்டியல்</string>
     <string name="power_menu_items_title">ஆற்றல் பட்டி உருப்படிகள்</string>
@@ -274,6 +276,7 @@
     <string name="status_bar_battery_title">மின்கலங்காட்டி</string>
     <string name="status_bar_battery_style_title">மின்கல நிலைப்பாணி</string>
     <string name="status_bar_battery_style_circle">வட்டம்</string>
+    <string name="status_bar_battery_style_dotted_circle">புள்ளி வட்டம்</string>
     <string name="status_bar_battery_style_text">உரை</string>
     <string name="status_bar_battery_percentage_title">மின்கல விழுக்காடு</string>
     <string name="status_bar_battery_percentage_default">மறைக்க</string>
