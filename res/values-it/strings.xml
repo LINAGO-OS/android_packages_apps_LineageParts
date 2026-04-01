@@ -399,6 +399,8 @@
     <string name="network_traffic_position_title">Posizione</string>
     <string name="network_traffic_autohide">Nascondi automaticamente</string>
     <string name="network_traffic_autohide_summary">Nascondi l\'indicatore di traffico quando non c\'è nessuna attività</string>
+    <string name="network_traffic_hide_arrows">Nascondi frecce</string>
+    <string name="network_traffic_hide_arrows_summary">Nascondi le frecce di download e upload</string>
     <string name="network_traffic_units_title">Unità di misura del traffico</string>
     <string name="network_traffic_units_kilobits">Kilobits al secondo (kb/s)</string>
     <string name="network_traffic_units_megabits">Megabits al secondo (Mb/s)</string>

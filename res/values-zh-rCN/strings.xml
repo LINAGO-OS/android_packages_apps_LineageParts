@@ -399,6 +399,8 @@
     <string name="network_traffic_position_title">位置</string>
     <string name="network_traffic_autohide">自动隐藏</string>
     <string name="network_traffic_autohide_summary">在网络不活跃时隐藏状态栏网速</string>
+    <string name="network_traffic_hide_arrows">隐藏方向箭头</string>
+    <string name="network_traffic_hide_arrows_summary">隐藏上传和下载的方向箭头</string>
     <string name="network_traffic_units_title">网络流量单位</string>
     <string name="network_traffic_units_kilobits">千比特每秒 (kb/s)</string>
     <string name="network_traffic_units_megabits">兆比特每秒 (Mb/s)</string>

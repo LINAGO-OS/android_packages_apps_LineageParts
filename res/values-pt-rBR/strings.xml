@@ -399,6 +399,8 @@
     <string name="network_traffic_position_title">Posição</string>
     <string name="network_traffic_autohide">Ocultar automaticamente</string>
     <string name="network_traffic_autohide_summary">Ocultar o monitor de tráfego quando não há atividade</string>
+    <string name="network_traffic_hide_arrows">Ocultar setas</string>
+    <string name="network_traffic_hide_arrows_summary">Ocultar setas de direção de upload e download</string>
     <string name="network_traffic_units_title">Unidades de medida do tráfego</string>
     <string name="network_traffic_units_kilobits">Kilobits por segundo (kb/s)</string>
     <string name="network_traffic_units_megabits">Megabits por segundo (Mb/s)</string>
