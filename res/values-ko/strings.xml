@@ -539,4 +539,67 @@
     <string name="sms_security_check_limit_summary">앱은 확인을 요청하기 전까지 1분 내에 %s개의 메시지만 보낼 수 있습니다.</string>
     <string name="sms_security_check_limit_summary_none">앱은 어떤 메시지도 확인 없이 보낼 수 없습니다.</string>
     <string name="sms_security_check_limit_always_confirm">항상 확인</string>
+
+    <!-- Device Spoofing & TrickyStore -->
+    <string name="spoofing_title">스푸핑 (Spoofing)</string>
+    <string name="spoofing_summary">무결성 검사를 우회하고 기능 잠금 해제</string>
+    <string name="play_integrity_category_title">Play Integrity / GMS 스푸핑</string>
+    <string name="play_integrity_spoof_title">Play Integrity 스푸핑</string>
+    <string name="play_integrity_spoof_summary">Google Play Integrity 검사를 통과하도록 기기 속성 스푸핑</string>
+    <string name="play_integrity_photos_spoof_title">Google 포토 스푸핑</string>
+    <string name="play_integrity_photos_spoof_summary">Pixel XL로 스푸핑하여 원본 화질 무제한 백업 잠금 해제</string>
+    <string name="import_pif_json_title">pif.json 가져오기</string>
+    <string name="import_pif_json_summary">커스텀 인증 지문 및 빌드 속성 가져오기</string>
+    <string name="reset_pif_config_title">PIF 설정 초기화</string>
+    <string name="reset_pif_config_summary">커스텀 pif.json을 삭제하고 ROM 내장 프로필 사용</string>
+    <string name="pif_imported">커스텀 pif.json을 성공적으로 가져왔습니다</string>
+    <string name="pif_reset_done">PIF 설정 초기화 완료</string>
+    <string name="trickystore_category_title">TrickyStore (Keybox 증명)</string>
+    <string name="trickystore_enable_title">TrickyStore 활성화</string>
+    <string name="trickystore_enable_summary">커스텀 Keybox를 사용하여 하드웨어 키 증명 스푸핑</string>
+    <string name="trickystore_keybox_status_title">Keybox 상태</string>
+    <string name="trickystore_keybox_status_summary_none">로드된 Keybox 없음 (Strong integrity 비활성)</string>
+    <string name="trickystore_keybox_status_summary_loaded">유효한 Keybox 로드됨 (%d 바이트)</string>
+    <string name="trickystore_import_keybox_title">keybox.xml 가져오기</string>
+    <string name="trickystore_import_keybox_summary">커스텀 OEM Keybox 인증서 체인 및 키 가져오기</string>
+    <string name="trickystore_target_apps_title">대상 앱 및 모드</string>
+    <string name="trickystore_target_apps_summary_default">기본 앱 (AUTO 모드의 Google Play 서비스 및 Play 스토어)</string>
+    <string name="trickystore_target_apps_summary_count">%d개 대상 앱 구성됨</string>
+    <string name="trickystore_security_patch_title">보안 패치 날짜 재정의</string>
+    <string name="trickystore_security_patch_summary">기본값 (ROM 빌드 날짜: YYYY-MM-DD)</string>
+    <string name="trickystore_patch_hint">YYYY-MM-DD</string>
+    <string name="trickystore_invalid_patch">잘못된 날짜 형식입니다. YYYY-MM-DD를 사용하세요</string>
+    <string name="trickystore_reset_title">TrickyStore 초기화</string>
+    <string name="trickystore_reset_summary">로드된 Keybox를 제거하고 대상 앱 설정 초기화</string>
+    <string name="trickystore_keybox_imported">Keybox를 성공적으로 가져와 로드했습니다</string>
+    <string name="trickystore_reset_done">TrickyStore 초기화 완료</string>
+    <string name="trickystore_saved">변경 사항 저장됨</string>
+    <string name="trickystore_error">작업을 수행하는 동안 오류가 발생했습니다</string>
+    <string name="integrity_reboot_notice">변경 사항을 적용하려면 재부팅하거나 대상 앱을 다시 시작하세요</string>
+    <string name="spoofing_settings_title">스푸핑 (Spoofing)</string>
+    <string name="spoofing_settings_summary">무결성 검사를 우회하고 기능 잠금 해제</string>
+    <string name="reset_pif_title">PIF 설정 초기화</string>
+    <string name="reset_pif_summary">커스텀 pif.json을 삭제하고 ROM 내장 프로필 사용</string>
+    <string name="integrity_settings_intro">무결성 검사를 우회하고 기능 잠금 해제</string>
+
+
+    <string name="pif_fetch_beta_title">Pixel Beta 가져오기</string>
+    <string name="pif_fetch_beta_summary">Google에서 최신 인증 Beta 지문 다운로드</string>
+    <string name="pif_select_channel">채널 선택</string>
+    <string name="pif_channel_latest">최신 릴리스 (Beta)</string>
+    <string name="pif_channel_canary">Canary</string>
+    <string name="pif_select_device">Pixel 기기 선택</string>
+    <string name="pif_fetching">Google Beta OTA 릴리스 검색 중...</string>
+    <string name="pif_generating">%s의 메타데이터 다운로드 중...</string>
+    <string name="pif_fetched_model">%s에 대한 지문이 성공적으로 적용되었습니다</string>
+    <string name="pif_failed">실패: %s</string>
+
+    <string name="trickystore_import_targets_title">대상 목록 가져오기</string>
+    <string name="trickystore_import_targets_summary">파일에서 target.txt 구성 가져오기</string>
+    <string name="trickystore_target_imported">대상 목록을 가져왔습니다</string>
+    <string name="trickystore_mode_auto">자동 (Auto)</string>
+    <string name="trickystore_mode_cert">인증서 생성 (Cert !)</string>
+    <string name="trickystore_mode_leaf">리프 인증서 (Leaf ?)</string>
+    <string name="trickystore_mode_disabled">비활성화됨</string>
+    <string name="trickystore_select_mode_title">증명 모드 선택</string>
 </resources>

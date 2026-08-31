@@ -527,4 +527,67 @@
     <string name="sms_security_check_limit_summary">在使用者認可之前，應用程式在 1 分鐘內只能傳送 %s 則訊息</string>
     <string name="sms_security_check_limit_summary_none">未經確認的應用程式不允許傳送任何訊息</string>
     <string name="sms_security_check_limit_always_confirm">一律確認</string>
+
+    <!-- Device Spoofing & TrickyStore -->
+    <string name="spoofing_title">偽裝 (Spoofing)</string>
+    <string name="spoofing_summary">繞過完整性檢查並解鎖功能</string>
+    <string name="play_integrity_category_title">Play Integrity / GMS 偽裝</string>
+    <string name="play_integrity_spoof_title">Play Integrity 偽裝</string>
+    <string name="play_integrity_spoof_summary">偽裝裝置屬性以通過 Google Play Integrity 檢查</string>
+    <string name="play_integrity_photos_spoof_title">Google 相簿偽裝</string>
+    <string name="play_integrity_photos_spoof_summary">偽裝為 Pixel XL 以解鎖無限原始畫質備份</string>
+    <string name="import_pif_json_title">匯入 pif.json</string>
+    <string name="import_pif_json_summary">匯入自訂認證指紋和屬性</string>
+    <string name="reset_pif_config_title">重設 PIF 設定</string>
+    <string name="reset_pif_config_summary">刪除自訂 pif.json 並使用 ROM 內建設定</string>
+    <string name="pif_imported">已成功匯入自訂 pif.json</string>
+    <string name="pif_reset_done">PIF 設定已重設</string>
+    <string name="trickystore_category_title">TrickyStore (Keybox 認證)</string>
+    <string name="trickystore_enable_title">啟用 TrickyStore</string>
+    <string name="trickystore_enable_summary">使用自訂 Keybox 偽裝硬體金鑰認證</string>
+    <string name="trickystore_keybox_status_title">Keybox 狀態</string>
+    <string name="trickystore_keybox_status_summary_none">未載入 Keybox (強完整性未啟用)</string>
+    <string name="trickystore_keybox_status_summary_loaded">已載入有效的 Keybox (%d 位元組)</string>
+    <string name="trickystore_import_keybox_title">匯入 keybox.xml</string>
+    <string name="trickystore_import_keybox_summary">匯入自訂 OEM Keybox 憑證鏈和私密金鑰</string>
+    <string name="trickystore_target_apps_title">目標應用程式與模式</string>
+    <string name="trickystore_target_apps_summary_default">預設應用程式 (Google Play 服務和商店處於 AUTO 模式)</string>
+    <string name="trickystore_target_apps_summary_count">已設定 %d 個目標應用程式</string>
+    <string name="trickystore_security_patch_title">安全性修補程式日期覆寫</string>
+    <string name="trickystore_security_patch_summary">預設 (ROM 建立日期: YYYY-MM-DD)</string>
+    <string name="trickystore_patch_hint">YYYY-MM-DD</string>
+    <string name="trickystore_invalid_patch">日期格式無效。請使用 YYYY-MM-DD</string>
+    <string name="trickystore_reset_title">重設 TrickyStore</string>
+    <string name="trickystore_reset_summary">移除已載入的 Keybox 並重設目標應用程式設定</string>
+    <string name="trickystore_keybox_imported">已成功匯入並載入 Keybox</string>
+    <string name="trickystore_reset_done">TrickyStore 重設完成</string>
+    <string name="trickystore_saved">變更已儲存</string>
+    <string name="trickystore_error">執行操作時發生錯誤</string>
+    <string name="integrity_reboot_notice">重新開機裝置或目標應用程式以使變更生效</string>
+    <string name="spoofing_settings_title">偽裝 (Spoofing)</string>
+    <string name="spoofing_settings_summary">繞過完整性檢查並解鎖功能</string>
+    <string name="reset_pif_title">重設 PIF 設定</string>
+    <string name="reset_pif_summary">刪除自訂 pif.json 並使用 ROM 內建設定</string>
+    <string name="integrity_settings_intro">繞過完整性檢查並解鎖功能</string>
+
+
+    <string name="pif_fetch_beta_title">獲取 Pixel Beta</string>
+    <string name="pif_fetch_beta_summary">從 Google 下載最新的認證 Beta 指紋</string>
+    <string name="pif_select_channel">選擇渠道</string>
+    <string name="pif_channel_latest">最新版本 (Beta)</string>
+    <string name="pif_channel_canary">Canary</string>
+    <string name="pif_select_device">選擇 Pixel 裝置</string>
+    <string name="pif_fetching">正在搜尋 Google Beta OTA 發布...</string>
+    <string name="pif_generating">正在下載 %s 的中繼資料...</string>
+    <string name="pif_fetched_model">已成功套用 %s 的指紋</string>
+    <string name="pif_failed">失敗: %s</string>
+
+    <string name="trickystore_import_targets_title">匯入目標清單</string>
+    <string name="trickystore_import_targets_summary">從檔案匯入 target.txt 設定</string>
+    <string name="trickystore_target_imported">目標清單匯入成功</string>
+    <string name="trickystore_mode_auto">自動 (Auto)</string>
+    <string name="trickystore_mode_cert">憑證生成 (Cert !)</string>
+    <string name="trickystore_mode_leaf">葉憑證 (Leaf ?)</string>
+    <string name="trickystore_mode_disabled">已停用</string>
+    <string name="trickystore_select_mode_title">選擇認證模式</string>
 </resources>

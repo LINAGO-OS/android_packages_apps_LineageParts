@@ -540,4 +540,67 @@
     <string name="sms_security_check_limit_summary">Запрашивать подтверждение при отправке более %s сообщений в минуту</string>
     <string name="sms_security_check_limit_summary_none">Приложениям запрещено отправлять сообщения без подтверждения</string>
     <string name="sms_security_check_limit_always_confirm">Подтверждать всегда</string>
+
+    <!-- Device Spoofing & TrickyStore -->
+    <string name="spoofing_title">Спуфинг</string>
+    <string name="spoofing_summary">Обход проверок целостности и разблокировка функций</string>
+    <string name="play_integrity_category_title">Play Integrity / Спуфинг GMS</string>
+    <string name="play_integrity_spoof_title">Спуфинг Play Integrity</string>
+    <string name="play_integrity_spoof_summary">Подмена свойств устройства для прохождения проверок Google Play Integrity</string>
+    <string name="play_integrity_photos_spoof_title">Спуфинг Google Фото</string>
+    <string name="play_integrity_photos_spoof_summary">Подмена устройства на Pixel XL для безлимитного резервного копирования в исходном качестве</string>
+    <string name="import_pif_json_title">Импорт pif.json</string>
+    <string name="import_pif_json_summary">Импорт отпечатка сборки и сертифицированных свойств</string>
+    <string name="reset_pif_config_title">Сбросить конфигурацию PIF</string>
+    <string name="reset_pif_config_summary">Удалить пользовательский pif.json и использовать встроенный профиль ROM</string>
+    <string name="pif_imported">Пользовательский pif.json успешно импортирован</string>
+    <string name="pif_reset_done">Конфигурация PIF сброшена</string>
+    <string name="trickystore_category_title">TrickyStore (Аттестация Keybox)</string>
+    <string name="trickystore_enable_title">Включить TrickyStore</string>
+    <string name="trickystore_enable_summary">Подмена аппаратной аттестации ключей с помощью Keybox</string>
+    <string name="trickystore_keybox_status_title">Статус Keybox</string>
+    <string name="trickystore_keybox_status_summary_none">Keybox не загружен (Строгая целостность не активна)</string>
+    <string name="trickystore_keybox_status_summary_loaded">Действительный Keybox загружен (%d байт)</string>
+    <string name="trickystore_import_keybox_title">Импорт keybox.xml</string>
+    <string name="trickystore_import_keybox_summary">Импорт цепочки сертификатов и ключей OEM</string>
+    <string name="trickystore_target_apps_title">Целевые приложения и режимы</string>
+    <string name="trickystore_target_apps_summary_default">По умолчанию (Google Play Services и Store в режиме AUTO)</string>
+    <string name="trickystore_target_apps_summary_count">Настроено целевых приложений: %d</string>
+    <string name="trickystore_security_patch_title">Переопределение даты патча безопасности</string>
+    <string name="trickystore_security_patch_summary">По умолчанию (дата сборки ROM: ГГГГ-ММ-ДД)</string>
+    <string name="trickystore_patch_hint">ГГГГ-ММ-ДД</string>
+    <string name="trickystore_invalid_patch">Неверный формат даты. Используйте ГГГГ-ММ-ДД</string>
+    <string name="trickystore_reset_title">Сбросить TrickyStore</string>
+    <string name="trickystore_reset_summary">Удалить Keybox и сбросить настройки целевых приложений</string>
+    <string name="trickystore_keybox_imported">Keybox успешно импортирован и загружен</string>
+    <string name="trickystore_reset_done">Сброс TrickyStore выполнен</string>
+    <string name="trickystore_saved">Изменения сохранены</string>
+    <string name="trickystore_error">Произошла ошибка при выполнении действия</string>
+    <string name="integrity_reboot_notice">Перезагрузите устройство или целевые приложения для применения изменений</string>
+    <string name="spoofing_settings_title">Спуфинг</string>
+    <string name="spoofing_settings_summary">Обход проверок целостности и разблокировка функций</string>
+    <string name="reset_pif_title">Сбросить конфигурацию PIF</string>
+    <string name="reset_pif_summary">Удалить пользовательский pif.json и использовать встроенный профиль ROM</string>
+    <string name="integrity_settings_intro">Обход проверок целостности и разблокировка функций</string>
+
+
+    <string name="pif_fetch_beta_title">Получить Pixel Beta</string>
+    <string name="pif_fetch_beta_summary">Загрузить последний сертифицированный отпечаток Google Beta</string>
+    <string name="pif_select_channel">Выберите канал</string>
+    <string name="pif_channel_latest">Последний выпуск (Beta)</string>
+    <string name="pif_channel_canary">Canary</string>
+    <string name="pif_select_device">Выберите устройство Pixel</string>
+    <string name="pif_fetching">Поиск выпусков Google Beta OTA...</string>
+    <string name="pif_generating">Загрузка метаданных для %s...</string>
+    <string name="pif_fetched_model">Отпечаток успешно применен для %s</string>
+    <string name="pif_failed">Ошибка: %s</string>
+
+    <string name="trickystore_import_targets_title">Импорт списка целей</string>
+    <string name="trickystore_import_targets_summary">Импортировать target.txt из файла</string>
+    <string name="trickystore_target_imported">Список целей успешно импортирован</string>
+    <string name="trickystore_mode_auto">Авто</string>
+    <string name="trickystore_mode_cert">Cert (Генерация !)</string>
+    <string name="trickystore_mode_leaf">Leaf (Хак листа ?)</string>
+    <string name="trickystore_mode_disabled">Отключено</string>
+    <string name="trickystore_select_mode_title">Выберите режим аттестации</string>
 </resources>

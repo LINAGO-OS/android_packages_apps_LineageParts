@@ -537,4 +537,67 @@
     <string name="sms_security_check_limit_summary">Uygulamalar onay gerektirmeden önce %s mesajını 1 dakika içinde gönderebilir</string>
     <string name="sms_security_check_limit_summary_none">Uygulamaların onay almadan mesaj göndermesine izin verilmez</string>
     <string name="sms_security_check_limit_always_confirm">Her zaman onayla</string>
+
+    <!-- Device Spoofing & TrickyStore -->
+    <string name="spoofing_title">Sahtekarlık (Spoofing)</string>
+    <string name="spoofing_summary">Bütünlük kontrollerini atlayın ve özellikleri açın</string>
+    <string name="play_integrity_category_title">Play Integrity / GMS Sahtekarlığı</string>
+    <string name="play_integrity_spoof_title">Play Integrity sahtekarlığı</string>
+    <string name="play_integrity_spoof_summary">Google Play Integrity kontrollerini geçmek için cihaz özelliklerini taklit edin</string>
+    <string name="play_integrity_photos_spoof_title">Google Fotoğraflar sahtekarlığı</string>
+    <string name="play_integrity_photos_spoof_summary">Sınırsız orijinal kalitede yedekleme için cihazı Pixel XL olarak taklit edin</string>
+    <string name="import_pif_json_title">pif.json İçe Aktar</string>
+    <string name="import_pif_json_summary">Özel sertifikalı parmak izi ve özellikleri içe aktarın</string>
+    <string name="reset_pif_config_title">PIF yapılandırmasını sıfırla</string>
+    <string name="reset_pif_config_summary">Özel pif.json dosyasını silin ve ROM yerleşik profilini kullanın</string>
+    <string name="pif_imported">Özel pif.json başarıyla içe aktarıldı</string>
+    <string name="pif_reset_done">PIF yapılandırması sıfırlandı</string>
+    <string name="trickystore_category_title">TrickyStore (Keybox Kanıtlaması)</string>
+    <string name="trickystore_enable_title">TrickyStore\'u Etkinleştir</string>
+    <string name="trickystore_enable_summary">Özel bir Keybox kullanarak donanım anahtarı kanıtlamasını taklit edin</string>
+    <string name="trickystore_keybox_status_title">Keybox Durumu</string>
+    <string name="trickystore_keybox_status_summary_none">Keybox yüklü değil (Güçlü bütünlük etkin değil)</string>
+    <string name="trickystore_keybox_status_summary_loaded">Geçerli Keybox yüklendi (%d bayt)</string>
+    <string name="trickystore_import_keybox_title">keybox.xml İçe Aktar</string>
+    <string name="trickystore_import_keybox_summary">Özel OEM Keybox sertifika zincirini ve anahtarlarını içe aktarın</string>
+    <string name="trickystore_target_apps_title">Hedef uygulamalar ve modlar</string>
+    <string name="trickystore_target_apps_summary_default">Varsayılan uygulamalar (AUTO modunda Google Play Hizmetleri ve Mağazası)</string>
+    <string name="trickystore_target_apps_summary_count">%d hedef uygulama yapılandırıldı</string>
+    <string name="trickystore_security_patch_title">Güvenlik yaması tarihini geçersiz kıl</string>
+    <string name="trickystore_security_patch_summary">Varsayılan (ROM derleme tarihi: YYYY-AA-GG)</string>
+    <string name="trickystore_patch_hint">YYYY-AA-GG</string>
+    <string name="trickystore_invalid_patch">Geçersiz tarih biçimi. YYYY-AA-GG kullanın</string>
+    <string name="trickystore_reset_title">TrickyStore\'u Sıfırla</string>
+    <string name="trickystore_reset_summary">Yüklü Keybox\'ı kaldırın ve hedef yapılandırmaları sıfırlayın</string>
+    <string name="trickystore_keybox_imported">Keybox başarıyla içe aktarıldı ve yüklendi</string>
+    <string name="trickystore_reset_done">TrickyStore sıfırlaması tamamlandı</string>
+    <string name="trickystore_saved">Değişiklikler kaydedildi</string>
+    <string name="trickystore_error">Bu işlem gerçekleştirilirken bir hata oluştu</string>
+    <string name="integrity_reboot_notice">Değişiklikleri uygulamak için cihazı veya hedef uygulamaları yeniden başlatın</string>
+    <string name="spoofing_settings_title">Sahtekarlık (Spoofing)</string>
+    <string name="spoofing_settings_summary">Bütünlük kontrollerini atlayın ve özellikleri açın</string>
+    <string name="reset_pif_title">PIF yapılandırmasını sıfırla</string>
+    <string name="reset_pif_summary">Özel pif.json dosyasını silin ve ROM yerleşik profilini kullanın</string>
+    <string name="integrity_settings_intro">Bütünlük kontrollerini atlayın ve özellikleri açın</string>
+
+
+    <string name="pif_fetch_beta_title">Pixel Beta Al</string>
+    <string name="pif_fetch_beta_summary">Google\'dan en son sertifikalı Beta parmak izini indirin</string>
+    <string name="pif_select_channel">Kanal seçin</string>
+    <string name="pif_channel_latest">En Son Sürüm (Beta)</string>
+    <string name="pif_channel_canary">Canary</string>
+    <string name="pif_select_device">Pixel cihazını seçin</string>
+    <string name="pif_fetching">Google Beta OTA sürümleri aranıyor...</string>
+    <string name="pif_generating">%s için meta veriler indiriliyor...</string>
+    <string name="pif_fetched_model">%s için parmak izi başarıyla uygulandı</string>
+    <string name="pif_failed">Başarısız: %s</string>
+
+    <string name="trickystore_import_targets_title">Hedef listesini içe aktar</string>
+    <string name="trickystore_import_targets_summary">Dosyadan target.txt yapılandırmasını içe aktar</string>
+    <string name="trickystore_target_imported">Hedef listesi başarıyla içe aktarıldı</string>
+    <string name="trickystore_mode_auto">Otomatik</string>
+    <string name="trickystore_mode_cert">Sertifika (Zorunlu !)</string>
+    <string name="trickystore_mode_leaf">Yaprak (Değiştir ?)</string>
+    <string name="trickystore_mode_disabled">Devre Dışı</string>
+    <string name="trickystore_select_mode_title">Onaylama modunu seçin</string>
 </resources>

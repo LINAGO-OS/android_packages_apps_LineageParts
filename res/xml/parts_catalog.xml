@@ -100,4 +100,10 @@
           android:title="@string/live_display_color_profile_title"
           android:fragment="org.lineageos.lineageparts.livedisplay.ColorProfileFragment"
           lineage:xmlRes="@xml/color_profile_settings" />
+
+    <part android:key="device_spoofing"
+          android:title="@string/spoofing_settings_title"
+          android:summary="@string/spoofing_settings_summary"
+          android:fragment="org.lineageos.lineageparts.spoofing.SpoofingSettings"
+          lineage:xmlRes="@xml/spoofing_settings" />
 </parts-catalog>

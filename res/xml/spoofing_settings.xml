@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2026 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lineage="http://schemas.android.com/apk/res-auto">
+
+    <!-- Header Description -->
+    <org.lineageos.lineageparts.widget.WallOfTextPreference
+        android:icon="@drawable/ic_trust"
+        android:summary="@string/integrity_settings_intro" />
+
+    <!-- Play Integrity / GMS Property Spoofing -->
+    <PreferenceCategory android:title="@string/play_integrity_category_title">
+
+        <SwitchPreferenceCompat
+            android:key="play_integrity_spoof"
+            android:title="@string/play_integrity_spoof_title"
+            android:summary="@string/play_integrity_spoof_summary"
+            android:defaultValue="true" />
+
+        <SwitchPreferenceCompat
+            android:key="play_integrity_photos_spoof"
+            android:title="@string/play_integrity_photos_spoof_title"
+            android:summary="@string/play_integrity_photos_spoof_summary"
+            android:defaultValue="true" />
+
+        <Preference
+            android:key="fetch_pif_beta"
+            android:title="@string/pif_fetch_beta_title"
+            android:summary="@string/pif_fetch_beta_summary" />
+
+        <Preference
+            android:key="import_pif_json"
+            android:title="@string/import_pif_json_title"
+            android:summary="@string/import_pif_json_summary" />
+
+        <Preference
+            android:key="reset_pif_config"
+            android:title="@string/reset_pif_title"
+            android:summary="@string/reset_pif_summary" />
+
+    </PreferenceCategory>
+
+    <!-- TrickyStore / Keybox Hardware Attestation -->
+    <PreferenceCategory android:title="@string/trickystore_category_title">
+
+        <Preference
+            android:key="trickystore_keybox_status"
+            android:title="@string/trickystore_keybox_status_title"
+            android:summary="@string/trickystore_keybox_status_summary_none" />
+
+        <Preference
+            android:key="trickystore_import_keybox"
+            android:title="@string/trickystore_import_keybox_title"
+            android:summary="@string/trickystore_import_keybox_summary" />
+
+        <Preference
+            android:key="trickystore_target_apps"
+            android:title="@string/trickystore_target_apps_title"
+            android:summary="@string/trickystore_target_apps_summary_default" />
+
+        <Preference
+            android:key="trickystore_import_targets"
+            android:title="@string/trickystore_import_targets_title"
+            android:summary="@string/trickystore_import_targets_summary" />
+
+        <Preference
+            android:key="trickystore_security_patch"
+            android:title="@string/trickystore_security_patch_title"
+            android:summary="@string/trickystore_security_patch_summary" />
+
+        <Preference
+            android:key="trickystore_reset"
+            android:title="@string/trickystore_reset_title"
+            android:summary="@string/trickystore_reset_summary" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

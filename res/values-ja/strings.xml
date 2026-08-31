@@ -540,4 +540,67 @@
     <string name="sms_security_check_limit_summary">アプリは確認をする前に1分間に%s通のメッセージを送信できます</string>
     <string name="sms_security_check_limit_summary_none">アプリは許可無くメッセージを送信することはできません</string>
     <string name="sms_security_check_limit_always_confirm">常に確認する</string>
+
+    <!-- Device Spoofing & TrickyStore -->
+    <string name="spoofing_title">偽装 (Spoofing)</string>
+    <string name="spoofing_summary">整合性チェックを回避し機能をロック解除</string>
+    <string name="play_integrity_category_title">Play Integrity / GMS 偽装</string>
+    <string name="play_integrity_spoof_title">Play Integrity 偽装</string>
+    <string name="play_integrity_spoof_summary">デバイスプロパティを偽装して Google Play Integrity チェックをパスします</string>
+    <string name="play_integrity_photos_spoof_title">Google フォトの偽装</string>
+    <string name="play_integrity_photos_spoof_summary">Pixel XL として偽装し、元の画質での無制限バックアップを有効にします</string>
+    <string name="import_pif_json_title">pif.json のインポート</string>
+    <string name="import_pif_json_summary">カスタムの認定ビルド指紋とプロパティをインポート</string>
+    <string name="reset_pif_config_title">PIF 設定のリセット</string>
+    <string name="reset_pif_config_summary">カスタム pif.json を削除し ROM 組み込みプロファイルを使用</string>
+    <string name="pif_imported">カスタム pif.json を正常にインポートしました</string>
+    <string name="pif_reset_done">PIF 設定をリセットしました</string>
+    <string name="trickystore_category_title">TrickyStore (Keybox 構成)</string>
+    <string name="trickystore_enable_title">TrickyStore を有効化</string>
+    <string name="trickystore_enable_summary">カスタム Keybox を使用してハードウェアキー構成を偽装</string>
+    <string name="trickystore_keybox_status_title">Keybox の状態</string>
+    <string name="trickystore_keybox_status_summary_none">Keybox がロードされていません (Strong integrity 無効)</string>
+    <string name="trickystore_keybox_status_summary_loaded">有効な Keybox がロードされました (%d バイト)</string>
+    <string name="trickystore_import_keybox_title">keybox.xml のインポート</string>
+    <string name="trickystore_import_keybox_summary">カスタム OEM Keybox 証明書チェーンと鍵をインポート</string>
+    <string name="trickystore_target_apps_title">対象アプリとモード</string>
+    <string name="trickystore_target_apps_summary_default">デフォルトアプリ (AUTO モードの Google Play 開発者サービスと Play ストア)</string>
+    <string name="trickystore_target_apps_summary_count">%d 個の対象アプリが設定されています</string>
+    <string name="trickystore_security_patch_title">セキュリティパッチ日付の上書き</string>
+    <string name="trickystore_security_patch_summary">デフォルト (ROM ビルド日: YYYY-MM-DD)</string>
+    <string name="trickystore_patch_hint">YYYY-MM-DD</string>
+    <string name="trickystore_invalid_patch">無効な日付形式です。YYYY-MM-DD を使用してください</string>
+    <string name="trickystore_reset_title">TrickyStore をリセット</string>
+    <string name="trickystore_reset_summary">ロードされた Keybox を削除し対象アプリ設定をリセット</string>
+    <string name="trickystore_keybox_imported">Keybox が正常にインポートおよびロードされました</string>
+    <string name="trickystore_reset_done">TrickyStore のリセットが完了しました</string>
+    <string name="trickystore_saved">変更を保存しました</string>
+    <string name="trickystore_error">操作中にエラーが発生しました</string>
+    <string name="integrity_reboot_notice">変更を適用するには、再起動するか対象アプリを再起動してください</string>
+    <string name="spoofing_settings_title">偽装 (Spoofing)</string>
+    <string name="spoofing_settings_summary">整合性チェックを回避し機能をロック解除</string>
+    <string name="reset_pif_title">PIF 設定のリセット</string>
+    <string name="reset_pif_summary">カスタム pif.json を削除し ROM 組み込みプロファイルを使用</string>
+    <string name="integrity_settings_intro">整合性チェックを回避し機能をロック解除</string>
+
+
+    <string name="pif_fetch_beta_title">Pixel Beta を取得</string>
+    <string name="pif_fetch_beta_summary">Google から最新の認定 Beta 指紋をダウンロード</string>
+    <string name="pif_select_channel">チャンネルを選択</string>
+    <string name="pif_channel_latest">最新リリース (Beta)</string>
+    <string name="pif_channel_canary">Canary</string>
+    <string name="pif_select_device">Pixel デバイスを選択</string>
+    <string name="pif_fetching">Google Beta OTA リリースを検索中...</string>
+    <string name="pif_generating">%s のメタデータをダウンロード中...</string>
+    <string name="pif_fetched_model">%s の指紋が正常に適用されました</string>
+    <string name="pif_failed">失敗: %s</string>
+
+    <string name="trickystore_import_targets_title">ターゲットリストのインポート</string>
+    <string name="trickystore_import_targets_summary">ファイルから target.txt 設定をインポート</string>
+    <string name="trickystore_target_imported">ターゲットリストをインポートしました</string>
+    <string name="trickystore_mode_auto">自動 (Auto)</string>
+    <string name="trickystore_mode_cert">証明書生成 (Cert !)</string>
+    <string name="trickystore_mode_leaf">リーフ証明書 (Leaf ?)</string>
+    <string name="trickystore_mode_disabled">無効</string>
+    <string name="trickystore_select_mode_title">構成モードの選択</string>
 </resources>

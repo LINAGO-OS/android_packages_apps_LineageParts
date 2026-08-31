@@ -540,4 +540,67 @@
     <string name="sms_security_check_limit_summary">Las aplicaciones pueden enviar hasta %s SMS en 1 minuto antes de requerir confirmación</string>
     <string name="sms_security_check_limit_summary_none">Las aplicaciones no pueden enviar mensajes sin confirmación</string>
     <string name="sms_security_check_limit_always_confirm">Confirmar siempre</string>
+
+    <!-- Device Spoofing & TrickyStore -->
+    <string name="spoofing_title">Suplantación (Spoofing)</string>
+    <string name="spoofing_summary">Omitir comprobaciones de integridad y desbloquear funciones</string>
+    <string name="play_integrity_category_title">Play Integrity / Suplantación GMS</string>
+    <string name="play_integrity_spoof_title">Suplantación de Play Integrity</string>
+    <string name="play_integrity_spoof_summary">Suplantar propiedades del dispositivo para pasar las comprobaciones de Google Play Integrity</string>
+    <string name="play_integrity_photos_spoof_title">Suplantación de Google Fotos</string>
+    <string name="play_integrity_photos_spoof_summary">Suplantar como Pixel XL para desbloquear copia de seguridad ilimitada en calidad original</string>
+    <string name="import_pif_json_title">Importar pif.json</string>
+    <string name="import_pif_json_summary">Importar huella digital y propiedades certificadas personalizadas</string>
+    <string name="reset_pif_config_title">Restablecer configuración de PIF</string>
+    <string name="reset_pif_config_summary">Eliminar pif.json personalizado y usar el perfil integrado de la ROM</string>
+    <string name="pif_imported">pif.json personalizado importado correctamente</string>
+    <string name="pif_reset_done">Configuración de PIF restablecida</string>
+    <string name="trickystore_category_title">TrickyStore (Atestación por Keybox)</string>
+    <string name="trickystore_enable_title">Habilitar TrickyStore</string>
+    <string name="trickystore_enable_summary">Suplantar atestación de clave de hardware usando una Keybox personalizada</string>
+    <string name="trickystore_keybox_status_title">Estado de Keybox</string>
+    <string name="trickystore_keybox_status_summary_none">Ninguna Keybox cargada (Integridad Fuerte inactiva)</string>
+    <string name="trickystore_keybox_status_summary_loaded">Keybox válida cargada (%d bytes)</string>
+    <string name="trickystore_import_keybox_title">Importar keybox.xml</string>
+    <string name="trickystore_import_keybox_summary">Importar cadena de certificados y claves OEM personalizadas</string>
+    <string name="trickystore_target_apps_title">Aplicaciones de destino y modos</string>
+    <string name="trickystore_target_apps_summary_default">Aplicaciones predeterminadas (Google Play Services y Store en modo AUTO)</string>
+    <string name="trickystore_target_apps_summary_count">%d aplicaciones de destino configuradas</string>
+    <string name="trickystore_security_patch_title">Sobrescribir fecha del parche de seguridad</string>
+    <string name="trickystore_security_patch_summary">Predeterminado (fecha de compilación: AAAA-MM-DD)</string>
+    <string name="trickystore_patch_hint">AAAA-MM-DD</string>
+    <string name="trickystore_invalid_patch">Formato de fecha no válido. Use AAAA-MM-DD</string>
+    <string name="trickystore_reset_title">Restablecer TrickyStore</string>
+    <string name="trickystore_reset_summary">Eliminar Keybox cargada y restablecer configuración de destino</string>
+    <string name="trickystore_keybox_imported">Keybox importada y cargada correctamente</string>
+    <string name="trickystore_reset_done">Restablecimiento de TrickyStore completado</string>
+    <string name="trickystore_saved">Cambios guardados</string>
+    <string name="trickystore_error">Ocurrió un error al realizar esta acción</string>
+    <string name="integrity_reboot_notice">Reinicie el dispositivo o las aplicaciones de destino para aplicar los cambios</string>
+    <string name="spoofing_settings_title">Suplantación (Spoofing)</string>
+    <string name="spoofing_settings_summary">Omitir comprobaciones de integridad y desbloquear funciones</string>
+    <string name="reset_pif_title">Restablecer configuración de PIF</string>
+    <string name="reset_pif_summary">Eliminar pif.json personalizado y usar el perfil integrado de la ROM</string>
+    <string name="integrity_settings_intro">Omitir comprobaciones de integridad y desbloquear funciones</string>
+
+
+    <string name="pif_fetch_beta_title">Obtener Pixel Beta</string>
+    <string name="pif_fetch_beta_summary">Descargar huella digital Beta certificada de Google</string>
+    <string name="pif_select_channel">Seleccionar canal</string>
+    <string name="pif_channel_latest">Última versión (Beta)</string>
+    <string name="pif_channel_canary">Canary</string>
+    <string name="pif_select_device">Seleccionar dispositivo Pixel</string>
+    <string name="pif_fetching">Buscando versiones Beta OTA de Google...</string>
+    <string name="pif_generating">Descargando metadatos para %s...</string>
+    <string name="pif_fetched_model">Huella digital aplicada con éxito para %s</string>
+    <string name="pif_failed">Fallo: %s</string>
+
+    <string name="trickystore_import_targets_title">Importar lista de aplicaciones</string>
+    <string name="trickystore_import_targets_summary">Importar configuración target.txt desde un archivo</string>
+    <string name="trickystore_target_imported">Lista de aplicaciones importada correctamente</string>
+    <string name="trickystore_mode_auto">Auto</string>
+    <string name="trickystore_mode_cert">Cert (Forzar generación !)</string>
+    <string name="trickystore_mode_leaf">Leaf (Modificar hoja ?)</string>
+    <string name="trickystore_mode_disabled">Desactivado</string>
+    <string name="trickystore_select_mode_title">Seleccionar modo de atestación</string>
 </resources>
