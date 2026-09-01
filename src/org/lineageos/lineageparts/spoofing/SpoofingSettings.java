@@ -291,49 +291,22 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
                 .show();
     }
 
-    private void fetchDevicesForChannel(PifChannel channel) {
-        Context context = requireContext();
-        ProgressDialog progress = new ProgressDialog(context);
-        progress.setMessage(getString(R.string.pif_fetching));
-        progress.setCancelable(false);
-        progress.show();
-
-        mExecutor.execute(() -> {
-            try {
-                List<PifDevice> devices = scanGoogleBetaDevices(channel);
-                mMainHandler.post(() -> {
-                    if (progress.isShowing()) progress.dismiss();
-                    if (devices.isEmpty()) {
-                        Toast.makeText(context, getString(R.string.pif_failed, "No devices found"), Toast.LENGTH_LONG).show();
-                    } else {
-                        showDeviceSelectionDialog(devices, channel);
-                    }
-                });
-            } catch (Exception e) {
-                Log.e(TAG, "Error fetching online devices", e);
-                mMainHandler.post(() -> {
-                    if (progress.isShowing()) progress.dismiss();
-                    Toast.makeText(context, getString(R.string.pif_failed, e.getMessage()), Toast.LENGTH_LONG).show();
-                });
-            }
-        });
-    }
-
-    private List<PifDevice> scanGoogleBetaDevices(PifChannel channel) {
+    private List<PifDevice> fetchAvailableDevices() {
         List<PifDevice> result = new ArrayList<>();
         Set<String> seen = new HashSet<>();
-
         String googleUrl = "https://developer.android.com";
         String versionsHtml = fetchHttp(googleUrl + "/about/versions");
         if (versionsHtml == null || versionsHtml.isEmpty()) return result;
 
-        Matcher verMatcher = Pattern.compile("https://developer\\.android\\.com/about/versions/(\\d+)").matcher(versionsHtml);
+        Matcher verMatcher = Pattern.compile("https://developer\.android\.com/about/versions/(\d+)").matcher(versionsHtml);
         List<Integer> versions = new ArrayList<>();
         while (verMatcher.find()) {
             int v = Integer.parseInt(verMatcher.group(1));
             if (!versions.contains(v)) versions.add(v);
         }
         Collections.sort(versions, Collections.reverseOrder());
+        if (versions.isEmpty()) return result;
+        versions.add(0, versions.get(0) + 1);
 
         for (int version : versions) {
             try {
@@ -341,7 +314,7 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
                 String otaHtml = fetchHttp(downloadUrl);
                 if (otaHtml == null) continue;
 
-                Matcher matchOta = Pattern.compile("href=\"(https://dl\\.google\\.com/[^\"]*ota/([^/\"]+_beta)[^\"]*?)\"").matcher(otaHtml);
+                Matcher matchOta = Pattern.compile("href=\"(https://dl\.google\.com/[^\"]*ota/([^/\"]+_beta)[^\"]*?)\"").matcher(otaHtml);
                 while (matchOta.find()) {
                     String otaUrl = matchOta.group(1);
                     String product = matchOta.group(2);
@@ -357,7 +330,122 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
         return result;
     }
 
-    private void showDeviceSelectionDialog(List<PifDevice> devices, PifChannel channel) {
+    private static class CanaryResult {
+        List<PifDevice> devices;
+        String apiKey;
+        CanaryResult(List<PifDevice> d, String a) { devices = d; apiKey = a; }
+    }
+
+    private CanaryResult fetchAvailableCanaryDevices() {
+        List<PifDevice> result = new ArrayList<>();
+        String googleUrl = "https://developer.android.com";
+        try {
+            String versionsHtml = fetchHttp(googleUrl + "/about/versions");
+            if (versionsHtml == null || versionsHtml.isEmpty()) return new CanaryResult(result, null);
+            Matcher verMatcher = Pattern.compile("https://developer\.android\.com/about/versions/(\d+)").matcher(versionsHtml);
+            List<Integer> versions = new ArrayList<>();
+            while (verMatcher.find()) {
+                int v = Integer.parseInt(verMatcher.group(1));
+                if (!versions.contains(v)) versions.add(v);
+            }
+            Collections.sort(versions, Collections.reverseOrder());
+            if (versions.isEmpty()) return new CanaryResult(result, null);
+            versions.add(0, versions.get(0) + 1);
+
+            Pattern rowPattern = Pattern.compile("<tr id=\"([^\"]+)\">(.*?)<td[^>]*>([^<]+)</td>", Pattern.DOTALL);
+
+            for (int version : versions) {
+                try {
+                    String latestHtml = fetchHttp(googleUrl + "/about/versions/" + version);
+                    if (latestHtml == null) continue;
+                    Matcher qprMatcher = Pattern.compile("href=\"(/about/versions/" + version + "/qpr(\d+)/download-ota)\"").matcher(latestHtml);
+                    int maxQpr = -1;
+                    String qprPath = null;
+                    while (qprMatcher.find()) {
+                        int qpr = Integer.parseInt(qprMatcher.group(2));
+                        if (qpr > maxQpr) {
+                            maxQpr = qpr;
+                            qprPath = qprMatcher.group(1);
+                        }
+                    }
+                    if (qprPath == null) continue;
+
+                    String fiHtml = fetchHttp(googleUrl + qprPath);
+                    if (fiHtml == null) continue;
+                    Set<String> seen = new HashSet<>();
+                    Matcher rowMatch = rowPattern.matcher(fiHtml);
+                    while (rowMatch.find()) {
+                        String device = rowMatch.group(1);
+                        if (!seen.add(device)) continue;
+                        String model = rowMatch.group(3).trim();
+                        if (model.isEmpty()) model = DEVICE_MODEL_MAP.getOrDefault(device, device);
+                        result.add(new PifDevice(device + "_beta", device, model, ""));
+                    }
+
+                    if (result.isEmpty()) continue;
+
+                    String flashHtml = fetchHttp("https://flash.android.com");
+                    String apiKey = null;
+                    if (flashHtml != null) {
+                        Matcher apiMatch = Pattern.compile("AIza[0-9A-Za-z_-]{35}").matcher(flashHtml);
+                        if (apiMatch.find()) {
+                            apiKey = apiMatch.group();
+                        }
+                    }
+                    return new CanaryResult(result, apiKey);
+                } catch (Exception ignored) {}
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Canary fetch failed", e);
+        }
+        return new CanaryResult(result, null);
+    }
+
+    private void fetchDevicesForChannel(PifChannel channel) {
+        Context context = requireContext();
+        ProgressDialog progress = new ProgressDialog(context);
+        progress.setMessage(getString(R.string.pif_fetching));
+        progress.setCancelable(false);
+        progress.show();
+
+        mExecutor.execute(() -> {
+            try {
+                List<PifDevice> devices;
+                String apiKey = null;
+                if (channel == PifChannel.LATEST_RELEASE) {
+                    devices = fetchAvailableDevices();
+                } else {
+                    CanaryResult cr = fetchAvailableCanaryDevices();
+                    devices = cr.devices;
+                    apiKey = cr.apiKey;
+                }
+                
+                final String finalApiKey = apiKey;
+                mMainHandler.post(() -> {
+                    if (progress.isShowing()) progress.dismiss();
+                    if (devices.isEmpty()) {
+                        Toast.makeText(context, getString(R.string.pif_failed, "No devices found"), Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if (channel == PifChannel.CANARY && (finalApiKey == null || finalApiKey.isEmpty())) {
+                        Toast.makeText(context, getString(R.string.pif_failed, "Failed to extract Flash Tool API key"), Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    showDeviceSelectionDialog(devices, channel, finalApiKey);
+                });
+            } catch (Exception e) {
+                Log.e(TAG, "Error fetching online devices", e);
+                mMainHandler.post(() -> {
+                    if (progress.isShowing()) progress.dismiss();
+                    Toast.makeText(context, getString(R.string.pif_failed, e.getMessage()), Toast.LENGTH_LONG).show();
+                });
+            }
+        });
+    }
+
+
+
+    private void showDeviceSelectionDialog(List<PifDevice> devices, PifChannel channel, String apiKey) {
         Context context = requireContext();
         String[] modelNames = new String[devices.size()];
         for (int i = 0; i < devices.size(); i++) {
@@ -367,13 +455,13 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
         new AlertDialog.Builder(context)
                 .setTitle(R.string.pif_select_device)
                 .setItems(modelNames, (dialog, which) -> {
-                    generateAndSavePif(devices.get(which), channel);
+                    generateAndSavePif(devices.get(which), channel, apiKey);
                 })
                 .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
-    private void generateAndSavePif(PifDevice device, PifChannel channel) {
+    private void generateAndSavePif(PifDevice device, PifChannel channel, String apiKey) {
         Context context = requireContext();
         ProgressDialog progress = new ProgressDialog(context);
         progress.setMessage(getString(R.string.pif_generating, device.model));
@@ -382,50 +470,136 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
 
         mExecutor.execute(() -> {
             try {
-                byte[] headerBytes = fetchPartialBytes(device.otaUrl, 4096);
-                if (headerBytes == null || headerBytes.length == 0) {
-                    throw new Exception("Could not download OTA metadata");
-                }
-                String partial = new String(headerBytes, StandardCharsets.ISO_8859_1);
-
-                String fingerprint = extractKey(partial, "post-build=");
-                String securityPatch = extractKey(partial, "security-patch-level=");
-
-                if (TextUtils.isEmpty(fingerprint) || TextUtils.isEmpty(securityPatch)) {
-                    throw new Exception("Could not extract fingerprint from OTA");
-                }
-
-                String[] fpParts = fingerprint.split("/");
-                String release = "";
-                if (fpParts.length > 2) {
-                    int colonIdx = fpParts[2].indexOf(':');
-                    if (colonIdx != -1) {
-                        release = fpParts[2].substring(colonIdx + 1);
+                String jsonString;
+                if (channel == PifChannel.LATEST_RELEASE) {
+                    byte[] headerBytes = fetchPartialBytes(device.otaUrl, 4096);
+                    if (headerBytes == null || headerBytes.length == 0) {
+                        throw new Exception("Could not download OTA metadata");
                     }
+                    String partial = new String(headerBytes, StandardCharsets.ISO_8859_1);
+
+                    String fingerprint = extractKey(partial, "post-build=");
+                    String securityPatch = extractKey(partial, "security-patch-level=");
+
+                    if (TextUtils.isEmpty(fingerprint) || TextUtils.isEmpty(securityPatch)) {
+                        throw new Exception("Could not extract fingerprint from OTA");
+                    }
+
+                    String[] fpParts = fingerprint.split("/");
+                    String release = "";
+                    if (fpParts.length > 2) {
+                        int colonIdx = fpParts[2].indexOf(':');
+                        if (colonIdx != -1) {
+                            release = fpParts[2].substring(colonIdx + 1);
+                        }
+                    }
+                    String buildId = fpParts.length > 3 ? fpParts[3] : "";
+
+                    JSONObject pifJson = new JSONObject();
+                    pifJson.put("TYPE", "user");
+                    pifJson.put("TAGS", "release-keys");
+                    pifJson.put("ID", buildId);
+                    pifJson.put("BRAND", "google");
+                    pifJson.put("DEVICE", device.device);
+                    pifJson.put("FINGERPRINT", fingerprint);
+                    pifJson.put("MANUFACTURER", "Google");
+                    pifJson.put("MODEL", device.model);
+                    pifJson.put("PRODUCT", device.product);
+                    pifJson.put("RELEASE", release);
+                    pifJson.put("SECURITY_PATCH", securityPatch);
+                    pifJson.put("DEVICE_INITIAL_SDK_INT", "21");
+                    pifJson.put("DEBUG", false);
+                    pifJson.put("SDK_INT", "32");
+                    jsonString = pifJson.toString(2);
+                } else {
+                    String buildsUrl = "https://content-flashstation-pa.googleapis.com/v1/builds?product=" + device.product + "&key=" + apiKey;
+                    HttpURLConnection conn = (HttpURLConnection) new URL(buildsUrl).openConnection();
+                    conn.setRequestProperty("Referer", "https://flash.android.com");
+                    conn.setRequestProperty("X-Goog-Api-Key", apiKey);
+                    conn.setConnectTimeout(15000);
+                    conn.setReadTimeout(15000);
+                    
+                    InputStream in = conn.getResponseCode() >= 400 ? conn.getErrorStream() : conn.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) sb.append(line).append("
+");
+                    String buildsJson = sb.toString();
+
+                    JSONObject root = new JSONObject(buildsJson);
+                    org.json.JSONArray buildsArray = root.optJSONArray("flashstationBuild");
+                    if (buildsArray == null) throw new Exception("No flashstationBuild array in Flash Tool response");
+
+                    String id = null, incremental = null, canaryId = null;
+                    for (int i = buildsArray.length() - 1; i >= 0; i--) {
+                        JSONObject b = buildsArray.optJSONObject(i);
+                        if (b == null) continue;
+                        JSONObject meta = b.optJSONObject("previewMetadata");
+                        if (meta == null || !meta.optBoolean("canary")) continue;
+
+                        String rc = b.optString("releaseCandidateName");
+                        String bid = b.optString("buildId");
+                        if (rc.isEmpty() || bid.isEmpty()) continue;
+
+                        id = rc;
+                        incremental = bid;
+                        String metaId = meta.optString("id");
+                        if (metaId.contains("canary-")) {
+                            canaryId = metaId;
+                        }
+                        break;
+                    }
+
+                    if (id == null || incremental == null) {
+                        throw new Exception("No canary build found for " + device.product);
+                    }
+
+                    String fingerprint = "google/" + device.product + "/" + device.device + ":CANARY/" + id + "/" + incremental + ":user/release-keys";
+                    String canaryMonth = null;
+                    if (canaryId != null) {
+                        Matcher m = Pattern.compile("canary-(\d{4})(\d{2})").matcher(canaryId);
+                        if (m.find()) {
+                            canaryMonth = m.group(1) + "-" + m.group(2);
+                        }
+                    }
+                    if (canaryMonth == null) throw new Exception("Failed to derive canary month id");
+
+                    String securityPatch = canaryMonth + "-05";
+                    try {
+                        String bulletinHtml = fetchHttp("https://source.android.com/docs/security/bulletin/pixel");
+                        if (bulletinHtml != null) {
+                            Matcher m = Pattern.compile("<td>(" + canaryMonth + "-\d{2})</td>").matcher(bulletinHtml);
+                            if (m.find()) {
+                                securityPatch = m.group(1);
+                            }
+                        }
+                    } catch (Exception e) {
+                        Log.d(TAG, "Bulletin fetch failed, using estimated patch: " + e.getMessage());
+                    }
+
+                    JSONObject pifJson = new JSONObject();
+                    pifJson.put("TYPE", "user");
+                    pifJson.put("TAGS", "release-keys");
+                    pifJson.put("ID", id);
+                    pifJson.put("BRAND", "google");
+                    pifJson.put("DEVICE", device.device);
+                    pifJson.put("FINGERPRINT", fingerprint);
+                    pifJson.put("MANUFACTURER", "Google");
+                    pifJson.put("MODEL", device.model);
+                    pifJson.put("PRODUCT", device.product);
+                    pifJson.put("RELEASE", "CANARY");
+                    pifJson.put("SECURITY_PATCH", securityPatch);
+                    pifJson.put("DEVICE_INITIAL_SDK_INT", "32");
+                    pifJson.put("DEBUG", false);
+                    pifJson.put("SDK_INT", "32");
+                    jsonString = pifJson.toString(2);
                 }
-                String buildId = fpParts.length > 3 ? fpParts[3] : "";
 
-                JSONObject pifJson = new JSONObject();
-                pifJson.put("TYPE", "user");
-                pifJson.put("TAGS", "release-keys");
-                pifJson.put("ID", buildId);
-                pifJson.put("BRAND", "google");
-                pifJson.put("DEVICE", device.device);
-                pifJson.put("FINGERPRINT", fingerprint);
-                pifJson.put("MANUFACTURER", "Google");
-                pifJson.put("MODEL", device.model);
-                pifJson.put("PRODUCT", device.product);
-                pifJson.put("RELEASE", release);
-                pifJson.put("SECURITY_PATCH", securityPatch);
-                pifJson.put("DEVICE_INITIAL_SDK_INT", "21");
-                pifJson.put("DEBUG", false);
-                pifJson.put("SDK_INT", "32");
-
-                String jsonString = pifJson.toString(2);
-
+                final String finalJsonString = jsonString;
                 mMainHandler.post(() -> {
                     if (progress.isShowing()) progress.dismiss();
-                    applyPifJson(device.model, jsonString);
+                    applyPifJson(device.model, finalJsonString);
                 });
 
             } catch (Exception e) {
@@ -606,16 +780,10 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
                 out.write(buf, 0, len);
             }
             byte[] rawBytes = out.toByteArray();
-            String keyboxXml = new String(rawBytes, StandardCharsets.UTF_8);
+            String encoded = Base64.encodeToString(rawBytes, Base64.NO_WRAP);
 
-            if (!keyboxXml.contains("<Keybox") && !keyboxXml.contains("<CertificateChain")
-                    && !keyboxXml.contains("<PrivateKey")) {
-                Toast.makeText(context, R.string.trickystore_error, Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            // crDroid 16.0 standard: Saves to Settings.Secure for AxSpoofManager
-            Settings.Secure.putString(getContentResolver(), SPOOF_TRICKYSTORE_KEYBOX, keyboxXml);
+            // crDroid 16.0 standard: Saves to Settings.Secure for AxSpoofManager as Base64 NO_WRAP
+            Settings.Secure.putString(getContentResolver(), SPOOF_TRICKYSTORE_KEYBOX, encoded);
 
             killGms();
             updateKeyboxStatus();
@@ -623,6 +791,35 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
         } catch (Exception e) {
             Log.e(TAG, "Error importing keybox", e);
             Toast.makeText(context, R.string.trickystore_error, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private String normalizePifPayload(String raw) {
+        String trimmed = raw.trim();
+        if (trimmed.isEmpty()) return "{}";
+        if (trimmed.startsWith("{")) return trimmed;
+        try {
+            JSONObject json = new JSONObject();
+            for (String line : trimmed.split("
+")) {
+                String stripped = line.trim();
+                if (stripped.isEmpty() || stripped.startsWith("#") || stripped.startsWith("//")) continue;
+                int eq = stripped.indexOf('=');
+                if (eq > 0) {
+                    String key = stripped.substring(0, eq).trim();
+                    String valueStr = stripped.substring(eq + 1).trim();
+                    int hashIdx = valueStr.indexOf('#');
+                    if (hashIdx >= 0) {
+                        valueStr = valueStr.substring(0, hashIdx).trim();
+                    }
+                    if (!key.isEmpty()) {
+                        json.put(key, valueStr);
+                    }
+                }
+            }
+            return json.toString(2);
+        } catch (Exception e) {
+            return "{}";
         }
     }
 
@@ -638,9 +835,10 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
             }
             byte[] rawBytes = out.toByteArray();
             String pifContent = new String(rawBytes, StandardCharsets.UTF_8);
+            String normalized = normalizePifPayload(pifContent);
 
             // crDroid 16.0 standard: Saves to Settings.Secure for AxSpoofManager
-            Settings.Secure.putString(getContentResolver(), SPOOF_PIF_CONFIG, pifContent);
+            Settings.Secure.putString(getContentResolver(), SPOOF_PIF_CONFIG, normalized);
             mPlayIntegrityPref.setChecked(true);
 
             killGms();
@@ -813,9 +1011,11 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
         try {
             ActivityManager am = (ActivityManager) requireContext().getSystemService(Context.ACTIVITY_SERVICE);
             if (am != null) {
-                am.killBackgroundProcesses("com.google.android.gms");
-                am.killBackgroundProcesses("com.android.vending");
-                am.killBackgroundProcesses("com.google.android.gms.unstable");
+                am.forceStopPackage("com.android.vending");
+                am.forceStopPackage("com.google.android.gms.unstable");
+                am.forceStopPackage("com.google.android.gms");
+                am.forceStopPackage("com.google.android.rkpdapp");
+                requireContext().getPackageManager().clearApplicationUserData("com.android.vending", null);
             }
         } catch (Exception ignored) {}
     }
