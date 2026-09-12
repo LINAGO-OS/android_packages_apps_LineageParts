@@ -81,6 +81,8 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
     private static final String SPOOF_TRICKYSTORE_TARGET = "spoof_trickystore_target";
     private static final String SPOOF_TRICKYSTORE_PATCH = "spoof_trickystore_patch";
 
+    private static final String PHOTOS_PACKAGE = "com.google.android.apps.photos";
+
     private static final Pattern PATCH_REGEX = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
 
     private static final Map<String, String> DEVICE_MODEL_MAP = new HashMap<>();
@@ -233,11 +235,24 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
                 Settings.Secure.putString(getContentResolver(), SPOOF_PIF_CONFIG, null);
                 killGms();
                 Toast.makeText(requireContext(), R.string.pif_reset_done, Toast.LENGTH_SHORT).show();
+            } else if (TextUtils.isEmpty(Settings.Secure.getString(getContentResolver(),
+                    SPOOF_PIF_CONFIG))) {
+                // No config yet: guide the user straight to fetching one,
+                // otherwise the switch would stay on with nothing applied.
+                showChannelSelectionDialog();
             }
             return true;
         } else if (preference == mPhotosSpoofPref) {
             boolean enabled = (Boolean) newValue;
             Settings.Secure.putInt(getContentResolver(), SPOOF_PIF_PHOTOS, enabled ? 1 : 0);
+            try {
+                ActivityManager am = (ActivityManager) requireContext()
+                        .getSystemService(Context.ACTIVITY_SERVICE);
+                if (am != null) {
+                    // crDroid 16.0: Photos must restart to re-read spoofed Build props.
+                    am.forceStopPackage(PHOTOS_PACKAGE);
+                }
+            } catch (Exception ignored) {}
             killGms();
             return true;
         }
@@ -880,9 +895,10 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
     }
 
     private void resetTrickyStore() {
-        Settings.Secure.putString(getContentResolver(), SPOOF_TRICKYSTORE_KEYBOX, null);
-        Settings.Secure.putString(getContentResolver(), SPOOF_TRICKYSTORE_TARGET, null);
-        Settings.Secure.putString(getContentResolver(), SPOOF_TRICKYSTORE_PATCH, null);
+        // crDroid 16.0: clear with empty string, not null.
+        Settings.Secure.putString(getContentResolver(), SPOOF_TRICKYSTORE_KEYBOX, "");
+        Settings.Secure.putString(getContentResolver(), SPOOF_TRICKYSTORE_TARGET, "");
+        Settings.Secure.putString(getContentResolver(), SPOOF_TRICKYSTORE_PATCH, "");
 
         killGms();
         refreshAllSummaries();
