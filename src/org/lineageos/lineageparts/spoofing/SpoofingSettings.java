@@ -221,6 +221,13 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
         refreshAllSummaries();
     }
 
+    @Override
+    public void onDestroy() {
+        mMainHandler.removeCallbacksAndMessages(null);
+        mExecutor.shutdownNow();
+        super.onDestroy();
+    }
+
     private void refreshAllSummaries() {
         updateKeyboxStatus();
         updateTargetAppsSummary();
@@ -313,7 +320,7 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
         String versionsHtml = fetchHttp(googleUrl + "/about/versions");
         if (versionsHtml == null || versionsHtml.isEmpty()) return result;
 
-        Matcher verMatcher = Pattern.compile("https://developer\.android\.com/about/versions/(\d+)").matcher(versionsHtml);
+        Matcher verMatcher = Pattern.compile("https://developer\\.android\\.com/about/versions/(\\d+)").matcher(versionsHtml);
         List<Integer> versions = new ArrayList<>();
         while (verMatcher.find()) {
             int v = Integer.parseInt(verMatcher.group(1));
@@ -329,7 +336,7 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
                 String otaHtml = fetchHttp(downloadUrl);
                 if (otaHtml == null) continue;
 
-                Matcher matchOta = Pattern.compile("href=\"(https://dl\.google\.com/[^\"]*ota/([^/\"]+_beta)[^\"]*?)\"").matcher(otaHtml);
+                Matcher matchOta = Pattern.compile("href=\"(https://dl\\.google\\.com/[^\"]*ota/([^/\"]+_beta)[^\"]*?)\"").matcher(otaHtml);
                 while (matchOta.find()) {
                     String otaUrl = matchOta.group(1);
                     String product = matchOta.group(2);
@@ -357,7 +364,7 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
         try {
             String versionsHtml = fetchHttp(googleUrl + "/about/versions");
             if (versionsHtml == null || versionsHtml.isEmpty()) return new CanaryResult(result, null);
-            Matcher verMatcher = Pattern.compile("https://developer\.android\.com/about/versions/(\d+)").matcher(versionsHtml);
+            Matcher verMatcher = Pattern.compile("https://developer\\.android\\.com/about/versions/(\\d+)").matcher(versionsHtml);
             List<Integer> versions = new ArrayList<>();
             while (verMatcher.find()) {
                 int v = Integer.parseInt(verMatcher.group(1));
@@ -373,7 +380,7 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
                 try {
                     String latestHtml = fetchHttp(googleUrl + "/about/versions/" + version);
                     if (latestHtml == null) continue;
-                    Matcher qprMatcher = Pattern.compile("href=\"(/about/versions/" + version + "/qpr(\d+)/download-ota)\"").matcher(latestHtml);
+                    Matcher qprMatcher = Pattern.compile("href=\"(/about/versions/" + version + "/qpr(\\d+)/download-ota)\"").matcher(latestHtml);
                     int maxQpr = -1;
                     String qprPath = null;
                     while (qprMatcher.find()) {
@@ -538,8 +545,7 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
                     StringBuilder sb = new StringBuilder();
                     String line;
-                    while ((line = reader.readLine()) != null) sb.append(line).append("
-");
+                    while ((line = reader.readLine()) != null) sb.append(line).append('\n');
                     String buildsJson = sb.toString();
 
                     JSONObject root = new JSONObject(buildsJson);
@@ -573,7 +579,7 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
                     String fingerprint = "google/" + device.product + "/" + device.device + ":CANARY/" + id + "/" + incremental + ":user/release-keys";
                     String canaryMonth = null;
                     if (canaryId != null) {
-                        Matcher m = Pattern.compile("canary-(\d{4})(\d{2})").matcher(canaryId);
+                        Matcher m = Pattern.compile("canary-(\\d{4})(\\d{2})").matcher(canaryId);
                         if (m.find()) {
                             canaryMonth = m.group(1) + "-" + m.group(2);
                         }
@@ -584,7 +590,7 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
                     try {
                         String bulletinHtml = fetchHttp("https://source.android.com/docs/security/bulletin/pixel");
                         if (bulletinHtml != null) {
-                            Matcher m = Pattern.compile("<td>(" + canaryMonth + "-\d{2})</td>").matcher(bulletinHtml);
+                            Matcher m = Pattern.compile("<td>(" + canaryMonth + "-\\d{2})</td>").matcher(bulletinHtml);
                             if (m.find()) {
                                 securityPatch = m.group(1);
                             }
@@ -815,8 +821,7 @@ public class SpoofingSettings extends SettingsPreferenceFragment implements
         if (trimmed.startsWith("{")) return trimmed;
         try {
             JSONObject json = new JSONObject();
-            for (String line : trimmed.split("
-")) {
+            for (String line : trimmed.split("\\R")) {
                 String stripped = line.trim();
                 if (stripped.isEmpty() || stripped.startsWith("#") || stripped.startsWith("//")) continue;
                 int eq = stripped.indexOf('=');
